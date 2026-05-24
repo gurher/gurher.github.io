@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Name — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0c;
+    --ink-2: #3a3832;
+    --ink-3: #8a8780;
+    --paper: #f8f6f1;
+    --paper-2: #eeeae0;
+    --paper-3: #e2ddd2;
+    --accent: #c85a1e;
+    --accent-light: #f4ede6;
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --max: 900px;
+    --gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--paper);
+    border-bottom: 1px solid var(--paper-3);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem clamp(1.25rem, 5vw, 3rem);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    letter-spacing: 0.03em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-3);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+  section { padding: clamp(3rem, 8vw, 6rem) 0; }
+  section + section { border-top: 1px solid var(--paper-3); }
+
+  /* ── HERO ── */
+  .hero { padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 7vw, 5rem); }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--ink-2); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.85rem; font-weight: 500;
+    padding: 0.65rem 1.4rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--paper);
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--paper-3);
+    color: var(--ink-2);
+  }
+  .btn-outline:hover { border-color: var(--ink-2); color: var(--ink); }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 3rem;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--paper-2);
+    color: var(--ink-3);
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--ink-3);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    align-items: start;
+  }
+  @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text { font-size: 1rem; color: var(--ink-2); font-weight: 300; line-height: 1.8; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .stat-card {
+    background: var(--paper-2);
+    padding: 1.25rem;
+    border-radius: 2px;
+  }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--ink-3); font-weight: 400; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--paper);
+    border: 1px solid var(--paper-3);
+    border-radius: 2px;
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .project-card:hover { border-color: var(--paper-3); transform: translateY(-3px); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-category {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.75rem;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    line-height: 1.65;
+    flex: 1;
+    font-weight: 300;
+  }
+  .project-result {
+    margin-top: 1rem;
+    padding: 0.6rem 0.8rem;
+    background: var(--accent-light);
+    border-radius: 2px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .project-result::before { content: '↑ '; }
+  .project-footer {
+    margin-top: 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .project-stack {
+    display: flex; gap: 0.4rem; flex-wrap: wrap;
+  }
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    background: var(--paper-2);
+    color: var(--ink-3);
+    border-radius: 2px;
+  }
+  .project-link {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-3);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+    white-space: nowrap;
+    margin-left: 0.75rem;
+  }
+  .project-link:hover { color: var(--accent); }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-group { }
+  .skill-group-name {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--paper-3);
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    padding: 0.3rem 0;
+    font-weight: 300;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-list li::before {
+    content: '—';
+    color: var(--paper-3);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap);
+    align-items: center;
+  }
+  @media (max-width: 600px) { .contact-inner { grid-template-columns: 1fr; } }
+  .contact-blurb {
+    font-size: 1rem; color: var(--ink-2); font-weight: 300; line-height: 1.8;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--paper-3);
+    border-radius: 2px;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-link-icon {
+    font-family: var(--mono); font-size: 0.75rem;
+    background: var(--paper-2); padding: 0.25rem 0.5rem; border-radius: 2px;
+    color: var(--ink-3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem clamp(1.25rem, 5vw, 3rem);
+    border-top: 1px solid var(--paper-3);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 0.8rem; color: var(--ink-3); font-family: var(--mono); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.6s ease both; }
+  .hero .hero-eyebrow { animation-delay: 0.05s; }
+  .hero h1   { animation-delay: 0.15s; }
+  .hero-sub  { animation-delay: 0.25s; }
+  .hero-actions { animation-delay: 0.35s; }
+  .hero-tags { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">your<span>.</span>name</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Data Analyst · Business Analyst · Product Analyst</p>
+    <h1>Turning messy data<br>into <em>clear decisions.</em></h1>
+    <p class="hero-sub">
+      I help organizations understand what their data is actually saying —
+      through rigorous analysis, clean dashboards, and stories that stick.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">SQL</span>
+      <span class="tag">Python</span>
+      <span class="tag">Tableau</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">dbt</span>
+      <span class="tag">A/B Testing</span>
+      <span class="tag">Stakeholder Communication</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">About</p>
+    <h2 class="section-title">The analyst behind the numbers</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Hi — I'm <strong>Your Name</strong>, a data analyst with X years of experience
+          working across e-commerce, fintech, and SaaS environments. I specialize in
+          translating ambiguous business questions into structured analyses that drive decisions.
+        </p>
+        <p>
+          My work sits at the intersection of technical depth and business intuition.
+          I'm as comfortable writing complex SQL as I am presenting findings to a VP.
+          I believe the best analysis is one people actually act on.
+        </p>
+        <p>
+          Previously at <strong>Company A</strong> and <strong>Company B</strong>.
+          Open to full-time roles in data analytics, business intelligence, and product analytics.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">X+</div>
+          <div class="stat-label">Years of experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Projects completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Industries covered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Coffee consumed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Selected projects</h2>
+    <p class="section-sub">Each project links to a GitHub repo or write-up with full methodology.</p>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 -->
+      <div class="project-card">
+        <p class="project-category">Customer Analytics</p>
+        <h3 class="project-title">Churn Prediction Model for SaaS Product</h3>
+        <p class="project-desc">
+          Built a logistic regression model to predict 30-day churn risk using behavioral signals.
+          Partnered with the CS team to design intervention playbooks based on risk tiers.
+        </p>
+        <div class="project-result">Reduced churn by 18% in 2 quarters</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">SQL</span>
+            <span class="stack-tag">Scikit-learn</span>
+          </div>
+          <a href="https://github.com/yourusername/project" class="project-link" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-card">
+        <p class="project-category">Business Intelligence</p>
+        <h3 class="project-title">Executive Revenue Dashboard</h3>
+        <p class="project-desc">
+          Designed a self-serve Tableau dashboard consolidating 5 data sources.
+          Replaced a 3-hour manual weekly report with a real-time view used by the C-suite.
+        </p>
+        <div class="project-result">Saved 12+ analyst hours per week</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span class="stack-tag">Tableau</span>
+            <span class="stack-tag">dbt</span>
+            <span class="stack-tag">Snowflake</span>
+          </div>
+          <a href="https://github.com/yourusername/project" class="project-link" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="project-card">
+        <p class="project-category">Product Analytics</p>
+        <h3 class="project-title">A/B Test: Checkout Flow Redesign</h3>
+        <p class="project-desc">
+          Ran a two-sided A/B test on a redesigned checkout flow, controlled for novelty effects.
+          Wrote the analysis plan, sized the experiment, and presented findings to product & design.
+        </p>
+        <div class="project-result">+9% conversion rate, stat. significant</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Statistics</span>
+            <span class="stack-tag">SQL</span>
+          </div>
+          <a href="https://github.com/yourusername/project" class="project-link" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <div class="project-card">
+        <p class="project-category">Data Engineering</p>
+        <h3 class="project-title">ELT Pipeline: Marketing Attribution</h3>
+        <p class="project-desc">
+          Built a dbt-based ELT pipeline to unify ad spend data from 4 channels into a single
+          attribution model. Automated reporting that previously required manual CSV merges.
+        </p>
+        <div class="project-result">Attribution clarity across $2M ad spend</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span class="stack-tag">dbt</span>
+            <span class="stack-tag">Airflow</span>
+            <span class="stack-tag">BigQuery</span>
+          </div>
+          <a href="https://github.com/yourusername/project" class="project-link" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 5 -->
+      <div class="project-card">
+        <p class="project-category">Exploratory Analysis</p>
+        <h3 class="project-title">Seoul Bike Share Demand Analysis</h3>
+        <p class="project-desc">
+          EDA and regression analysis on 8,700+ hourly records to identify demand drivers.
+          Visualized seasonal patterns and modeled peak demand for fleet allocation.
+        </p>
+        <div class="project-result">Model explains 87% of demand variance</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Pandas</span>
+            <span class="stack-tag">Seaborn</span>
+          </div>
+          <a href="https://github.com/yourusername/project" class="project-link" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 6 -->
+      <div class="project-card">
+        <p class="project-category">Business Analysis</p>
+        <h3 class="project-title">Pricing Strategy Analysis</h3>
+        <p class="project-desc">
+          Analyzed pricing elasticity across customer segments using transaction history.
+          Delivered a recommendation deck that led to a tiered pricing rollout.
+        </p>
+        <div class="project-result">+14% revenue per user post-rollout</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span class="stack-tag">SQL</span>
+            <span class="stack-tag">Excel</span>
+            <span class="stack-tag">Python</span>
+          </div>
+          <a href="https://github.com/yourusername/project" class="project-link" target="_blank">View →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">Tools &amp; expertise</h2>
+    <p class="section-sub">Technologies I use day-to-day across the analytics stack.</p>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-name">Query &amp; Data</p>
+        <ul class="skill-list">
+          <li>SQL (PostgreSQL, BigQuery)</li>
+          <li>dbt</li>
+          <li>Snowflake</li>
+          <li>Spark (basic)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Programming</p>
+        <ul class="skill-list">
+          <li>Python (Pandas, NumPy)</li>
+          <li>Scikit-learn</li>
+          <li>Matplotlib / Seaborn</li>
+          <li>R (basic)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Visualization</p>
+        <ul class="skill-list">
+          <li>Tableau</li>
+          <li>Power BI</li>
+          <li>Looker / LookML</li>
+          <li>Plotly / Dash</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Methods</p>
+        <ul class="skill-list">
+          <li>A/B Testing &amp; experimentation</li>
+          <li>Cohort &amp; funnel analysis</li>
+          <li>Regression modeling</li>
+          <li>Statistical inference</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's work together</h2>
+    <div class="contact-inner">
+      <div class="contact-blurb">
+        <p>
+          I'm currently open to full-time opportunities in data analytics, business intelligence,
+          and product analytics. If you have an interesting problem that needs a sharp analytical eye,
+          I'd love to hear about it.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:you@email.com" class="contact-link">
+          <span class="contact-link-icon">email</span>
+          you@email.com
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
+          <span class="contact-link-icon">li</span>
+          linkedin.com/in/yourprofile
+        </a>
+        <a href="https://github.com/yourusername" class="contact-link" target="_blank">
+          <span class="contact-link-icon">gh</span>
+          github.com/yourusername
+        </a>
+        <a href="resume.pdf" class="contact-link" target="_blank">
+          <span class="contact-link-icon">pdf</span>
+          Download resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Your Name</p>
+  <p>Built with HTML/CSS · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
